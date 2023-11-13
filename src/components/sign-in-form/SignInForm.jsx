@@ -29,7 +29,7 @@ const SignInForm = () => {
 
     try {
       const { user } = await signInWithGooglePopup();
-      createUserDocumentFromAuth(user);
+      await createUserDocumentFromAuth(user);
     } catch (err) {
       console.log("Closed Popup:", err);
     }
