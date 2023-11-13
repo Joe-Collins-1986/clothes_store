@@ -23,12 +23,9 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    //CODE NOT WORKING TO CLOSE POP UP SO ADDED TRY CATCH BLOCK
-    // const { user } = await signInWithGooglePopup();
-    // const userDocRef = await createUserDocumentFromAuth(user);
-
     await signInWithGoogleRedirect();
 
+    //POP UP BUILT WITH TRY CATCH TO RESOLVE CLOSE ERROR
     // try {
     //   await signInWithGooglePopup();
     // } catch (err) {
