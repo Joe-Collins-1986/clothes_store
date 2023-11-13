@@ -5,7 +5,7 @@ import Button from "../button/Button";
 
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
+  signInWithGoogleRedirect,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 
@@ -27,11 +27,13 @@ const SignInForm = () => {
     // const { user } = await signInWithGooglePopup();
     // const userDocRef = await createUserDocumentFromAuth(user);
 
-    try {
-      await signInWithGooglePopup();
-    } catch (err) {
-      return;
-    }
+    await signInWithGoogleRedirect();
+
+    // try {
+    //   await signInWithGooglePopup();
+    // } catch (err) {
+    //   return;
+    // }
   };
 
   const handleChange = (event) => {
