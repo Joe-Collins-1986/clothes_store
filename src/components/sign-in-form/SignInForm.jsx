@@ -1,36 +1,41 @@
 import { useState } from "react";
+
 import FormInput from "../form-input/FormInput";
-import "../sign-in-form/sign-in-form-styles.scss";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
 
 import {
-  signInWithGooglePopup,
-  signInWithGoogleRedirect,
   signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 
-const defultFormFields = {
+import { SignInContainer, ButtonsContainer } from "./sign-in-form-styles";
+
+const defaultFormFields = {
   email: "",
   password: "",
 };
 
 const SignInForm = () => {
-  const [formFields, setFormFields] = useState(defultFormFields);
+  const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
   const resetFormFields = () => {
-    setFormFields(defultFormFields);
+    setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGoogleRedirect();
+    await signInWithGooglePopup();
+  };
 
-    //POP UP BUILT WITH TRY CATCH TO RESOLVE CLOSE ERROR
-    // try {
-    //   await signInWithGooglePopup();
-    // } catch (err) {
-    //   return;
-    // }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await signInAuthUserWithEmailAndPassword(email, password);
+      resetFormFields();
+    } catch (error) {
+      console.log("user sign in failed", error);
+    }
   };
 
   const handleChange = (event) => {
@@ -39,31 +44,8 @@ const SignInForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      await signInAuthUserWithEmailAndPassword(email, password);
-
-      resetFormFields();
-    } catch (error) {
-      switch (error.code) {
-        // Latest update firebase generic error code for security so not worth switch
-        case "auth/invalid-login-credentials":
-          alert("Invalid details");
-          break;
-        case "xxx":
-          alert("xxx");
-          break;
-        default:
-          console.log(error);
-      }
-      console.log(error);
-    }
-  };
-
   return (
-    <div className="sign-up-container">
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -84,19 +66,18 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-
-        <div className="buttons-container">
+        <ButtonsContainer>
           <Button type="submit">Sign In</Button>
           <Button
-            type="button"
             buttonType={BUTTON_TYPE_CLASSES.google}
+            type="button"
             onClick={signInWithGoogle}
           >
-            Google Sign In
+            Sign In With Google
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
