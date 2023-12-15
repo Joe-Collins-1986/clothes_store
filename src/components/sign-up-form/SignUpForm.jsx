@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+
 import FormInput from "../form-input/FormInput";
-import "../sign-up-form/sign-up-form-styles.scss";
 import Button from "../button/Button";
 
 import {
@@ -8,7 +8,9 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
-const defultFormFields = {
+import { SignUpContainer } from "./sign-up-form-styles";
+
+const defaultFormFields = {
   displayName: "",
   email: "",
   password: "",
@@ -16,17 +18,11 @@ const defultFormFields = {
 };
 
 const SignUpForm = () => {
-  const [formFields, setFormFields] = useState(defultFormFields);
+  const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
   const resetFormFields = () => {
-    setFormFields(defultFormFields);
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormFields({ ...formFields, [name]: value });
+    setFormFields(defaultFormFields);
   };
 
   const handleSubmit = async (event) => {
@@ -47,14 +43,21 @@ const SignUpForm = () => {
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Email already in use");
+        alert("Cannot create user, email already in use");
+      } else {
+        console.log("user creation encountered an error", error);
       }
-      console.log("user creation error", error);
     }
   };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormFields({ ...formFields, [name]: value });
+  };
+
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -95,7 +98,7 @@ const SignUpForm = () => {
         />
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
