@@ -42,8 +42,6 @@ export const UserProvider = ({ children }) => {
     dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: userChange });
   };
 
-  console.log(currentUser);
-
   const value = { currentUser, setCurrentUser };
 
   useEffect(() => {
