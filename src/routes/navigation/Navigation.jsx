@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import CartIcon from "../../components/cart-icon/CartIcon";
@@ -38,7 +38,6 @@ const Navigation = () => {
           ) : (
             <NavLink to="/auth">SIGN IN</NavLink>
           )}
-
           <CartIcon />
         </NavLinks>
         {isCartOpen && <CartDropdown />}

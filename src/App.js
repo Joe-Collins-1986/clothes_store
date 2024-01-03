@@ -10,7 +10,7 @@ import {
 import Navigation from "./routes/navigation/Navigation";
 import Home from "./routes/home/Home";
 import Authentication from "./routes/authentication/Authentication";
-import Shop from "./routes/shop/shop.component";
+import Shop from "./routes/shop/Shop";
 import Checkout from "./routes/checkout/Checkout";
 
 import { setCurrentUser } from "./store/user/user.action";

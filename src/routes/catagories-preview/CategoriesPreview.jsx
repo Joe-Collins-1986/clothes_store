@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 
-import { CategoriesContext } from "../../contexts/catagories.context";
 import CategoryPreview from "../../components/catagory-preview/CatagoryPreview";
+import { selectCategoryMap } from "../../store/categories/category.selector";
 
 const CategoriesPreview = () => {
-  const { categoriesMap } = useContext(CategoriesContext);
+  const categoriesMap = useSelector(selectCategoryMap);
 
   return (
     <>
