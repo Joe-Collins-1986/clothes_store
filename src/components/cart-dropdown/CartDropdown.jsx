@@ -17,8 +17,6 @@ import {
 } from "./cart-dropdown.styles.js";
 
 const CartDropdown = () => {
-  // const { cartItems, isCartOpen, setIsCartOpen } = useContext(CartContext);
-
   const dispatch = useDispatch();
 
   const isCartOpen = useSelector(selectIsCartOpen);
