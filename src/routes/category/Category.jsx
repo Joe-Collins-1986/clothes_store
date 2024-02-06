@@ -4,7 +4,11 @@ import { useSelector } from "react-redux";
 
 import ProductCard from "../../components/product-card/ProductCard";
 
-import { selectCategoryMap } from "../../store/categories/category.selector";
+import {
+  selectCategoryMap,
+  selectCategories,
+  selectCategoryReducer,
+} from "../../store/categories/category.selector";
 
 import { CategoryContainer, Title } from "./category.styles";
 

@@ -70,7 +70,7 @@ export const addCollectionAndDocuments = async (
 export const getCatagoriesAndDocuments = async () => {
   const collectionRef = collection(db, "catagories");
 
-  const q = query(collectionRef);
+  const q = query(collectionRef); // query available to add filtered search from Firebase
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
