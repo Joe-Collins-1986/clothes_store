@@ -6,18 +6,13 @@ import CategoriesPreview from "../catagories-preview/CategoriesPreview";
 import Category from "../category/Category";
 
 import { getCatagoriesAndDocuments } from "../../utils/firebase/firebase.utils";
-import { setCategories } from "../../store/categories/category.action";
+import { fetchCategoriesAsync } from "../../store/categories/category.action";
 
 const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getCatagoriesMap = async () => {
-      const categoriesArray = await getCatagoriesAndDocuments();
-      dispatch(setCategories(categoriesArray));
-    };
-
-    getCatagoriesMap();
+    dispatch(fetchCategoriesAsync());
   }, []);
 
   return (
