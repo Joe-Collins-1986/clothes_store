@@ -10,10 +10,10 @@ export const checkUserSession = () => ({
 });
 
 export const googleSignInStart = () => ({
-  type: USER_ACTION_TYPES.GOOGLE_SIGN_IN,
+  type: USER_ACTION_TYPES.GOOGLE_SIGN_IN_START,
 });
 
-export const EmailSignInStart = (email, password) => ({
+export const emailSignInStart = (email, password) => ({
   type: USER_ACTION_TYPES.EMAIL_SIGN_IN_START,
   payload: { email, password },
 });
